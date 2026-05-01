@@ -25,6 +25,7 @@
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "forceConsistentCasingInFileNames": true,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@pages/*": ["ascend-vista/page-object/pages/*"],

@@ -15,6 +15,8 @@ export default defineConfig({
   testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
+  /* Number of parallel workers: 3 on CI, 4 locally */
+  workers: process.env.CI ? 3 : 4,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   /* Set a global timeout for all tests. */
