@@ -132,3 +132,6 @@ Performance testing, network analysis, and scenarios requiring deep browser inte
       console.log(text);
     }
     ```
+
+# Page Object Model
+1. POM is a mechanism that convert a page or a part of page into a class in programming to manage selectors and to reuse interaction methods, if it is any changes in source code, we just optimize scripts in one place

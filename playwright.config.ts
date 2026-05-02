@@ -24,7 +24,8 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: "https://the-internet.herokuapp.com/",
+    // baseURL: "https://the-internet.herokuapp.com",
+    baseURL: "https://demowebshop.tricentis.com/",
     headless: false,
     /* Set a timeout for each action like `click()`. */
     actionTimeout: 5 * 1000,
