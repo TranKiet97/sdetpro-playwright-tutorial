@@ -26,7 +26,7 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: "https://the-internet.herokuapp.com",
     baseURL: "https://demowebshop.tricentis.com/",
-    headless: false,
+    headless: process.env.HEADLESS === "true" ? true : false,
     /* Set a timeout for each action like `click()`. */
     actionTimeout: 5 * 1000,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
