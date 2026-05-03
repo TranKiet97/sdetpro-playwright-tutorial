@@ -18,13 +18,13 @@ test.describe("Day 29 Tests", () => {
         await loginPage.clickOnLoginBtn();
     });
 
-    test("Login with valid credentials version 2", async ({ page }) => {
+    test("Login with valid credentials version 2", {tag: '@smoke'}, async ({ page }) => {
         const loginPage = new LoginPageMethod02(page);
         await page.goto(SLUGS.LOGIN_PAGE);
         await loginPage.doLogin(LOGIN_CREDS);
     });
 
-    test("Test POM - Component Interaction", async ({ page }) => { 
+    test("Test POM - Component Interaction", {tag: '@smoke'}, async ({ page }) => { 
         await page.goto('/');
 
         const homePage = new HomePage(page);
