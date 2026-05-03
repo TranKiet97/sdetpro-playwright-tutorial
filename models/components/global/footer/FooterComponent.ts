@@ -10,11 +10,11 @@ export default class FooterComponent {
         this.component = component;
     }
 
-    public async inforColLinkList(): Promise<InfoColumnComponent> {
+    public async infoColComp(): Promise<InfoColumnComponent> {
         return new InfoColumnComponent(this.component.locator(InfoColumnComponent.SELECTOR));
     }
 
-    public async customerSerColLinkList(): Promise<InfoColumnComponent> {
+    public async customerSerColComp(): Promise<InfoColumnComponent> {
         return new CustomerSerColumnComponent(this.component.locator(CustomerSerColumnComponent.SELECTOR))
     }
 
