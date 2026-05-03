@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import FooterComponent from "models/components/globals/FooterComponent";
+import FooterComponent from "models/components/globals/footer/FooterComponent";
 
 export default class BasePage {
     protected page: Page;
