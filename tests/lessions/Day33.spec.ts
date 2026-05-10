@@ -4,7 +4,7 @@ import { expensiveComputerData } from "test-data/computer/ExpensiveComputerData"
 import { standardComputerData } from "test-data/computer/StandardComputerData";
 import OrderComputerFlow from "test-flows/computer/OrderComputerFlow";
 
-test.describe("Day 32 Tests", () => {
+test.describe("Day 33 Tests", () => {
 
     test("Test Cheap Computer Component", { tag: '@smoke' }, async ({ page }) => {
         await page.goto('/build-your-cheap-own-computer');
