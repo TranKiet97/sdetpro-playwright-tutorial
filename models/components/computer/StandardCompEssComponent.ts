@@ -4,17 +4,17 @@ import { Locator } from "@playwright/test";
 
 export default class StandardCompEssComponent extends ComputerEssentialComponent {
 
-    public async selectProcessor(value: string): Promise<void> {
+    public async selectProcessor(value: string): Promise<number> {
         const processorDropdown = this.component.locator('(//select[contains(@id, "product_attribute")])[1]');
-        await this.selectOptionInDropdown(processorDropdown, value);
+        return await this.selectOptionInDropdown(processorDropdown, value);
     }
 
-    public async selectRAM(value: string): Promise<void> {
+    public async selectRAM(value: string): Promise<number> {
         const ramDropdown = this.component.locator('(//select[contains(@id, "product_attribute")])[2]');
-        await this.selectOptionInDropdown(ramDropdown, value);
+        return await this.selectOptionInDropdown(ramDropdown, value);
     }
 
-    private async selectOptionInDropdown(drodownLoc: Locator, value: string): Promise<void> {
+    private async selectOptionInDropdown(drodownLoc: Locator, value: string): Promise<number> {
         const optionList = (await drodownLoc.locator('//option').all()).map(async item => await item.innerText());
         let optionIndex = -1;
         for (const option of optionList) {
@@ -29,6 +29,7 @@ export default class StandardCompEssComponent extends ComputerEssentialComponent
         }
 
         await drodownLoc.selectOption({ index: optionIndex })
+        return this.extractAdditionalPrice(await optionList[optionIndex]);
     }
 
 }
