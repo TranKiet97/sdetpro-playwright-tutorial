@@ -1,6 +1,8 @@
-import { Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import ComputerEssentialComponent from "models/components/computer/ComputerEssentialComponent";
+import CheckoutOptionPage from "models/pages/CheckoutOptionPage";
 import ComputerDetailsPage from "models/pages/ComputerDetailsPage";
+import ShoppingCartPage from "models/pages/ShoppingCartPage";
 import { ComputerDataType } from "test-data/ComputerDataType";
 
 export default class OrderComputerFlow {
@@ -37,6 +39,33 @@ export default class OrderComputerFlow {
         await this.page.waitForResponse(reqSlug);
 
         await compDetailsPage.headerComponent().clickOnShoppingCartLink();
+    }
+
+    public async verifyShoppingCart() {
+        const shoppingCartPage = new ShoppingCartPage(this.page);
+        const cartItemComponentList = await shoppingCartPage.cartItemComponentList();
+        const totalsComponent = await shoppingCartPage.totalsComponent();
+
+        expect(cartItemComponentList.length).toBeGreaterThan(0);
+        let sumOfSubTotals = 0;
+        for (const cartItem of cartItemComponentList) {
+            expect(await cartItem.subTotal()).toEqual(await cartItem.unitPrice() * await cartItem.quantity());
+            sumOfSubTotals += await cartItem.subTotal();
+        }
+        const priceCategories = await totalsComponent.priceCategories();
+        expect(sumOfSubTotals).toEqual(priceCategories["Sub-Total"])
+        expect(priceCategories["Total"]).toEqual(priceCategories["Sub-Total"] + priceCategories["Shipping"] + priceCategories["Tax"])
+
+    }
+
+    public async agreeTOSAndCheckout() {
+
+        const shoppingCartPage = new ShoppingCartPage(this.page);
+        const checkoutOptionPage = new CheckoutOptionPage(this.page)
+        await (await shoppingCartPage.totalsComponent()).acceptTOS();
+        await (await shoppingCartPage.totalsComponent()).clickCheckoutBtn();
+        await checkoutOptionPage.clickCheckoutAsGuestBtn();
+
     }
 
 }
